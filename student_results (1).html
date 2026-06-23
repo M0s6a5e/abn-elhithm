@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>نظام ابن الهيثم لإدارة شئون الطلاب</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Cairo', Tahoma, Arial, sans-serif;
+      font-size: 13px;
+      color: #222;
+    }
+
+    /* ══════════════════════════════════
+   LOGIN PAGE
+══════════════════════════════════ */
+    #login-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      background: #f5f5f5;
+      padding-bottom: 40px;
+    }
+
+    .login-header-title {
+      text-align: center;
+      padding: 30px 10px 20px;
+    }
+
+    .login-header-title h1 {
+      font-size: 22px;
+      font-weight: 400;
+      color: #222;
+    }
+
+    .login-header-title h1 b {
+      color: #c0392b;
+      font-weight: 900;
+    }
+
+    .login-header-title h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a3a6b;
+      margin-top: 6px;
+    }
+
+    /* 3 buttons row */
+    .login-btns {
+      display: flex;
+      width: 100%;
+      max-width: 740px;
+      margin-bottom: 0;
+    }
+
+    .login-btn {
+      flex: 1;
+      padding: 11px 6px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      color: #fff;
+    }
+
+    .btn-employees {
+      background: #d4a017;
+    }
+
+    .btn-students {
+      background: #17a2b8;
+    }
+
+    .btn-latest {
+      background: #1a6db5;
+    }
+
+    /* login box */
+    .login-box {
+      width: 100%;
+      max-width: 740px;
+      background: #fff;
+      border: 1px solid #aabbd0;
+    }
+
+    .login-box-header {
+      background: #1a6db5;
+      color: #fff;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .login-box-body {
+      padding: 20px 24px;
+    }
+
+    .login-hints {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .login-hint {
+      background: #fff8f8;
+      border: 1px solid #f8d7da;
+      border-radius: 3px;
+      padding: 10px 14px;
+      font-size: 11px;
+      color: #c0392b;
+      line-height: 1.8;
+      text-align: center;
+    }
+
+    .login-field {
+      display: flex;
+      align-items: center;
+      border: 1px solid #bbb;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .login-field input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 8px 12px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 13px;
+      text-align: right;
+      background: transparent;
+    }
+
+    .login-field .field-icon {
+      background: #f0f0f0;
+      border-right: 1px solid #bbb;
+      padding: 8px 10px;
+      color: #666;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .login-forgot {
+      text-align: left;
+      font-size: 11px;
+      color: #c0392b;
+      margin-bottom: 12px;
+      cursor: pointer;
+    }
+
+    .login-forgot:hover {
+      text-decoration: underline;
+    }
+
+    .login-submit {
+      background: #1a6db5;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 8px 28px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      float: left;
+    }
+
+    .login-submit:hover {
+      background: #155a9e;
+    }
+
+    .login-error {
+      background: #f8d7da;
+      border: 1px solid #f5c2c7;
+      color: #842029;
+      padding: 7px 14px;
+      border-radius: 3px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      text-align: center;
+      display: none;
+    }
+
+    /* bottom 2 boxes */
+    .login-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      width: 100%;
+      max-width: 740px;
+      margin-top: 0;
+      border-top: 1px solid #ddd;
+    }
+
+    .login-contact {
+      background: #fff0f0;
+      border: 1px solid #f5c2c7;
+      border-top: none;
+      padding: 14px 16px;
+      font-size: 12px;
+    }
+
+    .login-contact h4 {
+      color: #c0392b;
+      font-weight: 700;
+      margin-bottom: 8px;
+      font-size: 12px;
+    }
+
+    .login-contact p {
+      color: #555;
+      margin-bottom: 4px;
+      line-height: 1.7;
+    }
+
+    .login-contact a {
+      color: #1a6db5;
+      text-decoration: none;
+    }
+
+    .login-contact a:hover {
+      text-decoration: underline;
+    }
+
+    .login-features {
+      background: #fff;
+      border: 1px solid #aabbd0;
+      border-top: none;
+      border-right: none;
+      padding: 14px 16px;
+      font-size: 11px;
+    }
+
+    .login-features h4 {
+      background: #1a6db5;
+      color: #fff;
+      padding: 5px 10px;
+      font-size: 12px;
+      margin: -14px -16px 10px;
+      font-weight: 700;
+    }
+
+    .login-features ul {
+      list-style: none;
+      padding-top: 6px;
+    }
+
+    .login-features ul li {
+      padding: 2px 0;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .login-features ul li::before {
+      content: '• ';
+      color: #1a6db5;
+    }
+
+    /* ══════════════════════════════════
+   MAIN APP
+══════════════════════════════════ */
+    #app-page {
+      display: none;
+      background: #e8e8e8;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      background: #1a3a6b;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 10px;
+      font-size: 12px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header {
+      background: linear-gradient(180deg, #2255a4 0%, #1a3a6b 100%);
+      padding: 4px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #f90;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .header-title {
+      color: #fff;
+    }
+
+    .header-title h1 {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .header-title p {
+      font-size: 10px;
+      color: #cde;
+    }
+
+    .header-student {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, .1);
+      border-radius: 4px;
+      padding: 4px 10px;
+    }
+
+    .stu-photo {
+      width: 46px;
+      height: 46px;
+      border: 2px solid #f90;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ccc;
+      flex-shrink: 0;
+    }
+
+    .stu-info {
+      color: #fff;
+      text-align: right;
+    }
+
+    .stu-info strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .stu-info span {
+      font-size: 10px;
+      color: #cde;
+    }
+
+    .logout-btn {
+      background: #c0392b;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      padding: 4px 10px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 11px;
+      cursor: pointer;
+      margin-right: 6px;
+    }
+
+    .logout-btn:hover {
+      background: #a93226;
+    }
+
+    .breadcrumb {
+      background: #f0f0f0;
+      border-bottom: 1px solid #ccc;
+      padding: 3px 10px;
+      font-size: 11px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .breadcrumb a {
+      color: #1a3a6b;
+      text-decoration: none;
+    }
+
+    .breadcrumb .sep {
+      color: #999;
+    }
+
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 100px);
+    }
+
+    .sidebar {
+      width: 160px;
+      flex-shrink: 0;
+      background: #f0f0f0;
+      border-left: 1px solid #ccc;
+    }
+
+    .sidebar-title {
+      background: #1a3a6b;
+      color: #fff;
+      text-align: center;
+      padding: 7px 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .sidebar ul {
+      list-style: none;
+    }
+
+    .sidebar ul li a {
+      display: block;
+      padding: 6px 10px;
+      font-size: 12px;
+      color: #222;
+      text-decoration: none;
+      border-bottom: 1px solid #ddd;
+      transition: background .15s;
+    }
+
+    .sidebar ul li a:hover {
+      background: #dde5f5;
+      color: #1a3a6b;
+    }
+
+    .sidebar ul li.active a {
+      background: #f90;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .content {
+      flex: 1;
+      padding: 6px 8px;
+      overflow-x: auto;
+    }
+
+    .page-title-bar {
+      background: linear-gradient(90deg, #6baed6, #9ecae1);
+      color: #1a3a6b;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 6px;
+      border: 1px solid #aabbd0;
+    }
+
+    .title-tabs {
+      display: flex;
+      gap: 4px;
+      margin-right: auto;
+    }
+
+    .title-tab {
+      background: #fff;
+      border: 1px solid #aabbd0;
+      padding: 3px 12px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      color: #1a3a6b;
+      font-weight: 700;
+      border-radius: 2px;
+    }
+
+    .title-tab.active {
+      background: #1a3a6b;
+      color: #fff;
+      border-color: #1a3a6b;
+    }
+
+    .warning-bar {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      color: #856404;
+      padding: 4px 12px;
+      font-size: 11px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .sub-year-row {
+      background: #2255a4;
+      color: #ffe;
+      padding: 3px 20px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 0;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .sub-year-row .arrow {
+      font-size: 9px;
+      color: #f90;
+    }
+
+    .term-label {
+      padding: 3px 8px;
+      font-size: 11px;
+      color: #1a3a6b;
+      font-weight: 700;
+      margin: 3px 0 2px 0;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .term-label::before {
+      content: '▸';
+    }
+
+    .table-wrap {
+      margin-bottom: 3px;
+    }
+
+    table.results {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.results th {
+      background: #c5d5ea;
+      color: #1a3a6b;
+      padding: 4px 8px;
+      text-align: right;
+      font-size: 11px;
+      border: 1px solid #aabbd0;
+      font-weight: 700;
+    }
+
+    table.results th.center {
+      text-align: center;
+    }
+
+    table.results td {
+      padding: 4px 8px;
+      border: 1px solid #8fbc8f;
+      font-size: 12px;
+      background: #c8e6c9;
+    }
+
+    table.results tr:nth-child(even) td {
+      background: #a5d6a7;
+    }
+
+    table.results td.grade {
+      text-align: center;
+      font-weight: 700;
+      color: #1b5e20;
+    }
+
+    table.results td.center {
+      text-align: center;
+    }
+
+    table.results .col-num {
+      width: 30px;
+      text-align: center;
+    }
+
+    /* special row: weak grade = orange */
+    table.results tr.weak-row td {
+      background: #ffe0b2;
+      border-color: #ffb74d;
+    }
+
+    table.results tr.weak-row td.grade {
+      color: #e65100;
+      font-weight: 800;
+    }
+
+    .grade-ex {
+      color: #1b5e20;
+      font-weight: 800;
+    }
+
+    .grade-vg {
+      color: #0d47a1;
+      font-weight: 800;
+    }
+
+    .summary-row {
+      background: #c5d5ea;
+      display: flex;
+      gap: 20px;
+      padding: 4px 12px;
+      font-size: 11px;
+      border: 1px solid #aabbd0;
+      font-weight: 700;
+      color: #1a3a6b;
+      flex-wrap: wrap;
+    }
+
+    .summary-row span b {
+      margin-left: 4px;
+    }
+
+    .pending-box {
+      background: #e8f5e9;
+      border: 1px solid #8fbc8f;
+      padding: 28px;
+      text-align: center;
+      margin: 5px 0;
+    }
+
+    .pending-box p {
+      font-size: 13px;
+      color: #2e7d32;
+      font-weight: 700;
+    }
+
+    .panel {
+      display: none;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    /* personal */
+    .per-tab {
+      background: #f0f0f0;
+      border: 1px solid #aabbd0;
+      padding: 4px 14px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: 'Cairo', sans-serif;
+      color: #1a3a6b;
+      font-weight: 700;
+      border-radius: 2px;
+    }
+
+    .per-tab.active {
+      background: #fff;
+      border-bottom: 2px solid #f90;
+      color: #1a3a6b;
+    }
+
+    .per-panel {
+      display: none;
+    }
+
+    .per-panel.active {
+      display: block;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 5px 16px;
+      padding: 8px 0;
+      align-items: start;
+    }
+
+    .info-lbl {
+      font-weight: 700;
+      color: #333;
+      font-size: 12px;
+      white-space: nowrap;
+      padding: 3px 0;
+    }
+
+    .info-val {
+      color: #1a5276;
+      font-size: 12px;
+      padding: 3px 0;
+    }
+
+    .info-val.black {
+      color: #222;
+    }
+
+    .info-val.link {
+      color: #c0392b;
+    }
+
+    .stu-photo-big {
+      width: 70px;
+      height: 80px;
+      border: 1px solid #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eee;
+      margin-bottom: 8px;
+    }
+
+    .personal-content {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 4px 0;
+    }
+
+    table.karneh {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.karneh th {
+      background: #c5d5ea;
+      color: #1a3a6b;
+      padding: 5px 10px;
+      text-align: right;
+      font-size: 11px;
+      border: 1px solid #aabbd0;
+      font-weight: 700;
+    }
+
+    table.karneh td {
+      padding: 5px 10px;
+      border: 1px solid #aabbd0;
+      font-size: 12px;
+      background: #fff;
+    }
+
+    table.karneh tr:hover td {
+      background: #f0f5ff;
+    }
+
+    table.karneh td.link {
+      color: #c0392b;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    table.exams {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    table.exams th {
+      background: #c5d5ea;
+      color: #1a3a6b;
+      padding: 4px 8px;
+      text-align: right;
+      font-size: 11px;
+      border: 1px solid #aabbd0;
+      font-weight: 700;
+    }
+
+    table.exams td {
+      padding: 4px 8px;
+      border: 1px solid #ddd;
+      font-size: 11px;
+      background: #fff;
+    }
+
+    table.exams tr:nth-child(even) td {
+      background: #f8f8ff;
+    }
+
+    @media(max-width:640px) {
+      .sidebar {
+        display: none;
+      }
+
+      .header-student {
+        display: none;
+      }
+
+      table.results th,
+      table.results td {
+        padding: 3px 5px;
+        font-size: 10px;
+      }
+
+      .login-bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .login-hints {
+        grid-template-columns: 1fr;
+      }
+
+      .login-btns {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════
+     LOGIN PAGE
+══════════════════════════════════════ -->
+  <div id="login-page">
+
+    <div class="login-header-title">
+      <h1>نظام ابن الهيثم <b>لإدارة شئون الطلاب</b> العام الدراسى</h1>
+      <h2>جامعة المنيا</h2>
+    </div>
+
+    <div class="login-btns">
+      <button class="login-btn btn-latest">أحدث النتائج المعلنة</button>
+      <button class="login-btn btn-students">دخول الطلاب</button>
+      <button class="login-btn btn-employees">دخول الموظفين</button>
+    </div>
+
+    <div class="login-box">
+      <div class="login-box-header">تسجيل دخول الطلاب</div>
+      <div class="login-box-body">
+        <div class="login-hints">
+          <div class="login-hint">
+            للتسجيل لأول مرة على النظام يجب إدخان<br />
+            اسم المستخدم : الرقم القومى كاملاً 14 رقم<br />
+            و كلمة مرور الرقم القومى كاملاً 14 رقم<br />
+            ثم الضغط على تسجيل الدخول
+          </div>
+          <div class="login-hint">
+            اذا تم التسجيل فى مرة سابقة يجب الدخول<br />
+            اسم المستخدم : الرقم القومى<br />
+            كلمة المرور الذى تم التسجيل بها
+          </div>
+        </div>
+
+        <div class="login-error" id="login-error">❌ اسم المستخدم أو كلمة المرور غير صحيحة</div>
+
+        <div class="login-field">
+          <div class="field-icon">🪪</div>
+          <input type="text" id="inp-user" placeholder="الرقم القومى أو جواز السفر للوافدين" autocomplete="off" />
+        </div>
+        <div class="login-field">
+          <div class="field-icon">🔒</div>
+          <input type="password" id="inp-pass" placeholder="كلمة المرور" autocomplete="off" />
+        </div>
+        <div class="login-forgot">نسيت كلمة المرور؟</div>
+        <button class="login-submit" onclick="doLogin()">تسجيل الدخول</button>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+
+    <div class="login-bottom">
+      <div class="login-contact">
+        <h4>اتصل بنا</h4>
+        <p>📱 <b>تطبيق الهواتف الذكية</b> 🍎 🤖<br />
+          لدخول الطلاب من خلال الهواتف الذكية</p>
+        <p>🏛 <b>العنوان :</b> جامعة المنصورة - مجمع الخدمات الطلابية - شركة الطلاق لتقنية الاتصالات والمعلومات</p>
+        <p>👤 <b>الدعم الفنى للطلاب:</b> <a href="#">شئون الطلاب بالكلية</a></p>
+        <p>🌐 للمتصفح: لضمان عمل النظام بكفاءة عالية يجب استخدام جوجل كروم <a href="#">(اضغط هنا)</a></p>
+        <p>🔒 <a href="#">شهادة أمن النظام</a> فى حالة تعذر الدخول للنظام <a href="#">(اضغط هنا)</a></p>
+      </div>
+      <div class="login-features">
+        <h4>مميزات النظام</h4>
+        <ul>
+          <li>استخراج تقارير تفصيلية عن البيانات الشخصية والدراسية للطالب</li>
+          <li>اختيار وطباعة البطاقات الشخصية للطلاب مزودة بخاصية (BarCode)</li>
+          <li>توزيع أرقام جلوس طلاب سنة دراسية - توزيع لجان امتحان سنة دراسية</li>
+          <li>إعداد كشوف (توزيع الطلاب على الثبان - توزيع المقررات على الطلاب - رصد الدرجات لمقرر معين)</li>
+          <li>إمكانية عرض المقررات والجداول الدراسية وجداول الامتحانات على موقع الجامعة</li>
+          <li>أداء كافة أعمال الكنترول بدءاً من مرحلة إدخال البيانات وتطبيق قواعد الرأفة آلياً وحتى طباعة النتائج</li>
+          <li>إعلان نتائج الطلاب على موقع الجامعة فور اعتمادها</li>
+          <li>تسجيل محاولات الدخول غير المشروع وأماكن الدخول وعدد المحاولات ووقت كل محاولة</li>
+          <li>استخدام مبدأ لتشفير البيانات بين العميل والخادم (SSL Communication)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+  <!-- end login-page -->
+
+  <!-- ══════════════════════════════════════
+     MAIN APP PAGE
+══════════════════════════════════════ -->
+  <div id="app-page">
+
+    <div class="topbar">
+      <div class="topbar-right">
+
+      </div>
+    </div>
+
+    <div class="header">
+      <div class="header-logo">
+        <div class="logo-circle"><img src="OIP.jpg" alt="شعار الجامعة"
+            style="width:100%;height:100%;object-fit:contain;border-radius:50%;" /></div>
+        <div class="header-title">
+          <h1>ابن الهيثم - إدارة شئون الطلاب</h1>
+          <p>جامعة المنيا</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="logout-btn" onclick="doLogout()">تسجيل الخروج</button>
+        <div class="header-student">
+          <div class="stu-info">
+            <strong>مصطفى أرج محمد محمود</strong>
+            <span>ثانى - النظام الحديث · كلية علوم الرياضة</span>
+          </div>
+          <div class="stu-photo"><img src="80000100094709.jpg" alt="صورة الطالب"
+              style="width:44px;height:44px;object-fit:cover;border-radius:50%;border:2px solid #fff;" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="breadcrumb">
+      <a href="#">جامعة المنيا</a>
+      <span class="sep">›</span>
+      <a href="#">قرارة اتقاق كلية الاتصالات والمعلومات</a>
+      <span class="sep">›</span>
+      <a href="#">جامعة المنيا</a>
+    </div>
+
+    <div class="layout">
+      <div class="sidebar">
+        <div class="sidebar-title">الطالب</div>
+        <ul>
+          <li id="nav-personal"><a href="#" onclick="showPage('personal');return false;">البيانات الأساسية</a></li>
+          <li id="nav-exams"><a href="#" onclick="showPage('exams');return false;">جدول الامتحانات</a></li>
+          <li id="nav-karneh"><a href="#" onclick="showPage('karneh');return false;">شهادة الكاريه</a></li>
+          <li id="nav-schedule"><a href="#" onclick="showPage('schedule');return false;">الجدول الدراسى</a></li>
+          <li id="nav-results" class="active"><a href="#" onclick="showPage('results');return false;">النتائج
+              الدراسية</a></li>
+        </ul>
+      </div>
+
+      <div class="content">
+
+        <!-- RESULTS PAGE -->
+        <div id="page-results" class="page-content">
+          <div class="page-title-bar">
+            <span>النتائج الدراسية</span>
+            <div class="title-tabs">
+              <button class="title-tab active" onclick="switchYear('y1',this)">الفرقة الأولى</button>
+              <button class="title-tab" onclick="switchYear('y2',this)">الفرقة الثانية</button>
+            </div>
+          </div>
+          <div class="warning-bar">⚠️ تنبيه خاص : البيانات المعروضة فى هذه الصفحة لا يُعد بها كمستند رسمى</div>
+
+          <!-- YEAR 1 -->
+          <div class="panel active" id="y1">
+            <div class="sub-year-row"><span class="arrow">▼</span> أولى - النظام الحديث - كلية علوم الرياضة &nbsp; 2024
+              – 2025</div>
+            <div class="term-label">الفصل الدراسى الأول</div>
+            <div class="table-wrap">
+              <table class="results">
+                <thead>
+                  <tr>
+                    <th class="col-num">#</th>
+                    <th>المقرر</th>
+                    <th style="width:120px;" class="center">التقدير</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="col-num">1</td>
+                    <td>مقدمة فى الادارة الرياضية</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">2</td>
+                    <td>مدخل وتاريخ التربية الرياضية</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">3</td>
+                    <td>ألعاب والعاب صغيرة</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">4</td>
+                    <td>العاب قوى (1)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">5</td>
+                    <td>رياضات مائية (1)</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">6</td>
+                    <td>الجمباز (1)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">7</td>
+                    <td>كرة القدم (1)</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">8</td>
+                    <td>مصارعة (1)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">9</td>
+                    <td>ملاكمة</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">10</td>
+                    <td>العاب تمهيدية</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">11</td>
+                    <td>التمرين الوظيفى (1)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">12</td>
+                    <td>طرق تدريس التربية الرياضية</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">13</td>
+                    <td>مدخل الى التدريب وادارات الفرق</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="term-label">الفصل الدراسى الثانى</div>
+            <div class="table-wrap">
+              <table class="results">
+                <thead>
+                  <tr>
+                    <th class="col-num">#</th>
+                    <th>المقرر</th>
+                    <th style="width:120px;" class="center">التقدير</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="col-num">1</td>
+                    <td>التمرين الوظيفى (2)</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">2</td>
+                    <td>مدخل علوم الحركة الرياضية</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">3</td>
+                    <td>لغة اجنبية</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">4</td>
+                    <td>الجيمناز (1)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">5</td>
+                    <td>الإيقاع الحركى</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">6</td>
+                    <td>كرة طائرة (1)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">7</td>
+                    <td>كرة يد (1)</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">8</td>
+                    <td>كرة سلة (1)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">9</td>
+                    <td>سلاح</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="summary-row">
+              <span><b>المجموع :</b> 1850</span>
+              <span><b>التقدير :</b> جيد جداً</span>
+              <span><b>النسبة :</b> 85 %</span>
+            </div>
+          </div>
+          <!-- end y1 -->
+
+          <!-- YEAR 2 -->
+          <div class="panel" id="y2">
+            <div class="sub-year-row"><span class="arrow">▼</span> ثانى - النظام الحديث - كلية علوم الرياضة &nbsp; 2025
+              – 2026</div>
+            <div class="term-label">الفصل الدراسى الأول</div>
+            <div class="table-wrap">
+              <table class="results">
+                <thead>
+                  <tr>
+                    <th class="col-num">#</th>
+                    <th>المقرر</th>
+                    <th style="width:120px;" class="center">التقدير</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="col-num">1</td>
+                    <td>تمرينات (2)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">2</td>
+                    <td>كرة قدم (2)</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">3</td>
+                    <td>فسيولوجيا (1)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">4</td>
+                    <td>مدخل علم النفس الرياضى</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">5</td>
+                    <td>رياضيات مائية (2)</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">6</td>
+                    <td>هوكى</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">7</td>
+                    <td>علم التدريب الرياضى</td>
+                    <td class="grade grade-ex">ممتاز</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">8</td>
+                    <td>العاب قوى (2)</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                  <tr class="weak-row">
+                    <td class="col-num">9</td>
+                    <td>مصارعة (2)</td>
+                    <td class="grade">ضعيف</td>
+                  </tr>
+                  <tr>
+                    <td class="col-num">10</td>
+                    <td>العلاقات العامة فى مجال الرياضى (1)</td>
+                    <td class="grade grade-vg">جيد جداً</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="summary-row">
+              <span><b>المجموع :</b> 1720</span>
+              <span><b>التقدير :</b> جيد جداً</span>
+              <span><b>النسبة :</b> 82 %</span>
+            </div>
+            <div class="term-label">الفصل الدراسى الثانى</div>
+            <div class="pending-box">
+              <p>⏳ لم يتم الإعلان عن النتائج حتى الآن</p>
+            </div>
+          </div>
+          <!-- end y2 -->
+        </div>
+        <!-- end page-results -->
+
+        <!-- PERSONAL PAGE -->
+        <div id="page-personal" class="page-content" style="display:none;">
+          <div class="page-title-bar" style="justify-content:flex-end;gap:4px;">
+            <div class="title-tabs" style="margin-right:0;">
+              <button class="per-tab active" onclick="switchPer('per-personal',this)">البيانات الشخصية</button>
+              <button class="per-tab" onclick="switchPer('per-contact',this)">بيانات الاتصال</button>
+              <button class="per-tab" onclick="switchPer('per-parent',this)">بيانات ولى الامر</button>
+              <button class="per-tab" onclick="switchPer('per-prev',this)">بيانات المؤهل السابق</button>
+            </div>
+          </div>
+          <div id="per-personal" class="per-panel active" style="padding:8px;">
+            <div class="personal-content">
+              <div class="stu-photo-big"><img src="80000100094709.jpg" alt="صورة الطالب"
+                  style="width:100%;height:100%;object-fit:cover;border-radius:8px;" /></div>
+              <div class="info-grid">
+                <div class="info-lbl">الاسم</div>
+                <div class="info-val black">مصطفى فرج محمد محمود</div>
+                <div class="info-lbl">الاسم إنجليزى</div>
+                <div class="info-val black">Mostafa fareg Mahmoud Mohamed</div>
+                <div class="info-lbl">الكود</div>
+                <div class="info-val black">100094709</div>
+                <div class="info-lbl">الديانة</div>
+                <div class="info-val link">مسلم</div>
+                <div class="info-lbl">النوع</div>
+                <div class="info-val black">ذكر</div>
+                <div class="info-lbl">الجنسية</div>
+                <div class="info-val link">مصرى</div>
+                <div class="info-lbl">تاريخ الميلاد</div>
+                <div class="info-val black">5/3/2007</div>
+                <div class="info-lbl">محل الميلاد</div>
+                <div class="info-val link">المنيا</div>
+                <div class="info-lbl">الحالة الاجتماعية</div>
+                <div class="info-val black">أعزب</div>
+                <div class="info-lbl">نوع البطاقة</div>
+                <div class="info-val black">بطاقة قومية</div>
+                <div class="info-lbl">رقم البطاقة</div>
+                <div class="info-val black">30703052400614</div>
+                <div class="info-lbl">اسم الأب</div>
+                <div class="info-val black">فرج محمد محمود محمد</div>
+                <div class="info-lbl">حالة القيد</div>
+                <div class="info-val black">مستجد</div>
+                <div class="info-lbl">نوع القبول</div>
+                <div class="info-val black">مكتب تنسيق (إنترنت)</div>
+                <div class="info-lbl">عام القبول</div>
+                <div class="info-val link">2024 - 2025</div>
+                <div class="info-lbl">حائز رياضى</div>
+                <div class="info-val black">لا</div>
+                <div class="info-lbl">كشف طبى</div>
+                <div class="info-val black">تعم</div>
+                <div class="info-lbl">فصيلة الدم</div>
+                <div class="info-val black">—</div>
+                <div class="info-lbl">ملاحظات شئون الطلاب</div>
+                <div class="info-val black">—</div>
+              </div>
+            </div>
+          </div>
+          <div id="per-contact" class="per-panel" style="padding:8px;">
+            <div class="info-grid">
+              <div class="info-lbl">العنوان</div>
+              <div class="info-val black">مغاغة - المنيا</div>
+              <div class="info-lbl">رقم التليفون</div>
+              <div class="info-val black">—</div>
+              <div class="info-lbl">رقم المحمول</div>
+              <div class="info-val link">01123280821</div>
+              <div class="info-lbl">البريد الإلكترونى</div>
+              <div class="info-val black">—</div>
+            </div>
+          </div>
+          <div id="per-parent" class="per-panel" style="padding:8px;">
+            <div class="info-grid">
+              <div class="info-lbl">اسم ولى الأمر</div>
+              <div class="info-val black">فرج محمد محمود محمد</div>
+              <div class="info-lbl">صلة القرابة</div>
+              <div class="info-val black">الأب</div>
+              <div class="info-lbl">رقم المحمول</div>
+              <div class="info-val link">01123280821</div>
+              <div class="info-lbl">العنوان</div>
+              <div class="info-val black">مغاغة - المنيا</div>
+            </div>
+          </div>
+          <div id="per-prev" class="per-panel" style="padding:8px;">
+            <div class="info-grid">
+              <div class="info-lbl">المؤهل</div>
+              <div class="info-val black">ثانوى عام أدبى</div>
+              <div class="info-lbl">الجهة</div>
+              <div class="info-val link">مغاغة الثانوية بنين</div>
+              <div class="info-lbl">سنة التخرج</div>
+              <div class="info-val black">2024</div>
+              <div class="info-lbl">المجموع</div>
+              <div class="info-val black">221.5</div>
+              <div class="info-lbl">النسبة</div>
+              <div class="info-val black">54.02 %</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- EXAMS PAGE -->
+        <div id="page-exams" class="page-content" style="display:none;">
+          <div class="page-title-bar">جدول الامتحانات</div>
+          <div style="padding:6px 0;">
+            <table class="exams">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>المادة</th>
+                  <th>التاريخ</th>
+                  <th>اليوم</th>
+                  <th>الوقت</th>
+                  <th>القاعة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>تمرينات (2)</td>
+                  <td>12/6/2026</td>
+                  <td>الخميس</td>
+                  <td>9:00 ص</td>
+                  <td>قاعة أ</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>كرة قدم (2)</td>
+                  <td>14/6/2026</td>
+                  <td>الأحد</td>
+                  <td>10:00 ص</td>
+                  <td>الملعب</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>فسيولوجيا (1)</td>
+                  <td>16/6/2026</td>
+                  <td>الثلاثاء</td>
+                  <td>9:00 ص</td>
+                  <td>قاعة ب</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>مدخل علم النفس الرياضى</td>
+                  <td>18/6/2026</td>
+                  <td>الخميس</td>
+                  <td>11:00 ص</td>
+                  <td>قاعة أ</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>رياضيات مائية (2)</td>
+                  <td>20/6/2026</td>
+                  <td>السبت</td>
+                  <td>9:00 ص</td>
+                  <td>حمام السباحة</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>هوكى</td>
+                  <td>22/6/2026</td>
+                  <td>الاثنين</td>
+                  <td>10:00 ص</td>
+                  <td>الملعب</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>علم التدريب الرياضى</td>
+                  <td>24/6/2026</td>
+                  <td>الأربعاء</td>
+                  <td>9:00 ص</td>
+                  <td>قاعة ج</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>العاب قوى (2)</td>
+                  <td>26/6/2026</td>
+                  <td>الخميس</td>
+                  <td>9:00 ص</td>
+                  <td>الملعب</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>مصارعة (2)</td>
+                  <td>28/6/2026</td>
+                  <td>الأحد</td>
+                  <td>10:00 ص</td>
+                  <td>قاعة رياضية</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>العلاقات العامة فى مجال الرياضى (1)</td>
+                  <td>30/6/2026</td>
+                  <td>الثلاثاء</td>
+                  <td>11:00 ص</td>
+                  <td>قاعة ب</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- KARNEH PAGE -->
+        <div id="page-karneh" class="page-content" style="display:none;">
+          <div class="page-title-bar">طباعة الكارنيه</div>
+          <div style="padding:6px 0;">
+            <table class="karneh">
+              <thead>
+                <tr>
+                  <th>الفرقة</th>
+                  <th>العام</th>
+                  <th>تاريخ طباعة الملاحظات</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                <tr>
+                  <td>أولى - النظام الحديث - كلية علوم الرياضة</td>
+                  <td>2024 - 2025</td>
+                  <td class="link">- تم الطباعة فى 27/10/2024 &nbsp; سارى حتى العام الاكاديمى ( 2024 - 2025 )</td>
+                </tr>
+                <tr>
+                  <td>ثانية - النظام الحديث - كلية علوم الرياضة</td>
+                  <td>2025 - 2026</td>
+                  <td class="link">- تم طباعة كارنيه ثانية نظام حديث 2025 - 2026</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- SCHEDULE PAGE -->
+        <div id="page-schedule" class="page-content" style="display:none;">
+          <div class="page-title-bar">الجدول الدراسى</div>
+          <div style="padding:6px 0;">
+            <table class="exams">
+              <thead>
+                <tr>
+                  <th>اليوم</th>
+                  <th>8 - 10</th>
+                  <th>10 - 12</th>
+                  <th>12 - 2</th>
+                  <th>2 - 4</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>السبت</td>
+                  <td>تمرينات (2)</td>
+                  <td>كرة قدم (2)</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>الأحد</td>
+                  <td>فسيولوجيا (1)</td>
+                  <td>—</td>
+                  <td>علم النفس الرياضى</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>الاثنين</td>
+                  <td>رياضيات مائية (2)</td>
+                  <td>هوكى</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>الثلاثاء</td>
+                  <td>علم التدريب الرياضى</td>
+                  <td>—</td>
+                  <td>العاب قوى (2)</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>الأربعاء</td>
+                  <td>مصارعة (2)</td>
+                  <td>العلاقات العامة (1)</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <td>الخميس</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- end content -->
+    </div><!-- end layout -->
+  </div><!-- end app-page -->
+
+  <script>
+    var CORRECT_USER = '30703052400614';
+    var CORRECT_PASS = 'QvI6701#';
+
+    function doLogin() {
+      var u = document.getElementById('inp-user').value.trim();
+      var p = document.getElementById('inp-pass').value;
+      var err = document.getElementById('login-error');
+      if (u === CORRECT_USER && p === CORRECT_PASS) {
+        err.style.display = 'none';
+        document.getElementById('login-page').style.display = 'none';
+        document.getElementById('app-page').style.display = 'block';
+      } else {
+        err.style.display = 'block';
+        document.getElementById('inp-pass').value = '';
+        document.getElementById('inp-pass').focus();
+      }
+    }
+
+    function doLogout() {
+      document.getElementById('app-page').style.display = 'none';
+      document.getElementById('login-page').style.display = 'flex';
+      document.getElementById('inp-user').value = '';
+      document.getElementById('inp-pass').value = '';
+      document.getElementById('login-error').style.display = 'none';
+    }
+
+    // Enter key on login
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && document.getElementById('login-page').style.display !== 'none') {
+        doLogin();
+      }
+    });
+
+    function showPage(name) {
+      document.querySelectorAll('.page-content').forEach(p => p.style.display = 'none');
+      document.getElementById('page-' + name).style.display = 'block';
+      document.querySelectorAll('.sidebar ul li').forEach(li => li.classList.remove('active'));
+      var nav = document.getElementById('nav-' + name);
+      if (nav) nav.classList.add('active');
+    }
+
+    function switchYear(id, btn) {
+      document.querySelectorAll('#page-results .panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.title-tab').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function switchPer(id, btn) {
+      document.querySelectorAll('.per-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.per-tab').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
