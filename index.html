@@ -1415,6 +1415,34 @@
               </tbody>
             </table>
           </div>
+
+          <!-- Download Karneh Button -->
+          <div style="text-align:center; margin-top:18px;">
+            <button id="btn-download-karneh" onclick="downloadKarnehImages()" style="
+              background: linear-gradient(135deg, #1a3a6b 0%, #2563b0 100%);
+              color: #fff;
+              border: none;
+              border-radius: 6px;
+              padding: 10px 28px;
+              font-size: 14px;
+              font-family: 'Cairo', sans-serif;
+              font-weight: 700;
+              cursor: pointer;
+              display: inline-flex;
+              align-items: center;
+              gap: 8px;
+              box-shadow: 0 3px 10px rgba(26,58,107,0.25);
+              transition: transform 0.15s, box-shadow 0.15s;
+            "
+            onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 16px rgba(26,58,107,0.35)';"
+            onmouseout="this.style.transform='';this.style.boxShadow='0 3px 10px rgba(26,58,107,0.25)';">
+              <span style="font-size:18px;">⬇️</span>
+              تنزيل صور الكارنيه (الوجهان)
+            </button>
+            <div style="font-size:11px; color:#666; margin-top:6px; font-family:'Cairo',sans-serif;">
+              سيتم تنزيل صورة الوجه الأمامى وصورة الوجه الخلفى للكارنيه
+            </div>
+          </div>
         </div>
 
         <!-- SCHEDULE PAGE -->
@@ -1537,6 +1565,23 @@
       document.querySelectorAll('.per-tab').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.add('active');
       btn.classList.add('active');
+    }
+
+    function downloadKarnehImages() {
+      var images = [
+        { href: 'front.png', name: 'كارنيه_الوجه_الأمامى.png' },
+        { href: 'back.png',  name: 'كارنيه_الوجه_الخلفى.png'  }
+      ];
+      images.forEach(function(img, i) {
+        setTimeout(function() {
+          var a = document.createElement('a');
+          a.href = img.href;
+          a.download = img.name;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }, i * 300);
+      });
     }
   </script>
 </body>
